@@ -19,5 +19,5 @@ O programa solicita que o usuário informe o genótipo de dois indivíduos (AA, 
 ## 🚀 Como executar
 
 1. Baixe o `.zip` e extraia em seu computador.
-2. Abra o projeto no **Visual Studio**.
-3. Compile e execute a aplicação.
+2. Abra a pasta do projeto no explorador de arquivos.
+3. execute a aplicação **ProjetoM.exe**.
