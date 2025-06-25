@@ -1,8 +1,9 @@
-﻿string alelo1, alelo2, dominancia, confirmacao;
+﻿﻿string alelo1, alelo2, dominancia, confirmacao;
 
 Console.WriteLine("------ Genética Mendeliana ------\n");
 Console.WriteLine("Digite o genótipo dos dois indivíduos (AA, Aa ou aa):\n");
 
+//seleçao dos genotipos
 do
 {
     Console.Write("Genótipo do 1º indivíduo: ");
@@ -39,6 +40,7 @@ do
 
 } while (dominancia != "C" && dominancia != "I");
 
+//confirmaçao do conteudo
 Console.WriteLine("\n---Confirme os dados---");
 Console.WriteLine($"\nGenótipo do 1º indivíduo: {alelo1}");
 Console.WriteLine($"Genótipo do 2º indivíduo: {alelo2}");
@@ -62,8 +64,10 @@ if (confirmacao == "N")
     return;
 }
 
+//tempo de espera
 Console.WriteLine("Processando combinações genéticas, aguarde...\n");
 Thread.Sleep(2000); 
+//----------------------------------------------------------------------
 
 string[] genotiposPossiveis = new string[] { "AA", "Aa", "aa" };
 
@@ -89,28 +93,48 @@ foreach (var aleloPai1 in alelos1)
     }
 }
 
-int total = resultado[0] + resultado[1] + resultado[2];
-Console.WriteLine("\nResultado do cruzamento:");
-Console.WriteLine($"AA: {100.0 * resultado[0] / total}%");
-Console.WriteLine($"Aa: {100.0 * resultado[1] / total}%");
-Console.WriteLine($"aa: {100.0 * resultado[2] / total}%");
+//Genotipo Individuos(visual)
+Console.WriteLine($"\nGenótipo do 1º indivíduo----: {alelo1}");
+Console.WriteLine($"Genótipo do 2º indivíduo----: {alelo2}");
+Console.WriteLine($"Tipo de Dominância----------: {dominancia}");
 
+//Tabela(visual)
+
+Console.WriteLine();
+
+Console.Write($"   |");
+foreach (var alelo in alelos2)
+{
+    Console.Write($"  {alelo} ");
+}
+Console.WriteLine("\n-----------------");
+
+foreach (var aleloLinha in alelos1)
+{
+    Console.Write($" {aleloLinha} |");
+    foreach (var aleloColuna in alelos2)
+    {
+        string gen = OrdenarGenotipo(aleloLinha + aleloColuna);
+        Console.Write($" {gen} ");
+    }
+    Console.WriteLine();
+
+}
+
+//tipo de dominancia(visual)
+int total = resultado[0] + resultado[1] + resultado[2];
   
-if (dominancia == "C")
-{
-    Console.WriteLine("\nTipo de Dominância: Completa");
-    Console.WriteLine($"Fenótipo dominante (AA ou Aa): {100.0 * (resultado[0] + resultado[1]) / total}%");
-    Console.WriteLine($"Fenótipo recessivo (aa): {100.0 * resultado[2] / total}%");
-}
-else if (dominancia == "I")
-{
-    Console.WriteLine("\nTipo de Dominância: Incompleta");
-    Console.WriteLine($"Fenótipo intermediário (Aa): {100.0 * resultado[1] / total}%");
-    Console.WriteLine($"Fenótipo dominante (AA): {100.0 * resultado[0] / total}%");
-    Console.WriteLine($"Fenótipo recessivo (aa): {100.0 * resultado[2] / total}%");
-}
-    // tabela do codigo
-    
+double porcentAA = 100.0 * resultado[0] / total;
+double porcentAa = 100.0 * resultado[1] / total;
+double porcentaa = 100.0 * resultado[2] / total;
+
+Console.WriteLine();
+Console.WriteLine("Resultado genótipo a genótipo:");
+Console.WriteLine($"AA: {porcentAA,4:0}% - não apresenta a característica recessiva");
+Console.WriteLine($"Aa: {porcentAa,4:0}% - não apresenta a característica recessiva");
+Console.WriteLine($"aa: {porcentaa,4:0}% - apresenta a característica recessiva");
+
+//subR(visual)
 static string[] ObterAlelos(string genotipo)
 {
     if (genotipo == "AA") return new string[] { "A", "A" };
