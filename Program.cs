@@ -134,6 +134,10 @@ Console.WriteLine($"AA: {porcentAA,4:0}% - não apresenta a característica rece
 Console.WriteLine($"Aa: {porcentAa,4:0}% - não apresenta a característica recessiva");
 Console.WriteLine($"aa: {porcentaa,4:0}% - apresenta a característica recessiva");
 
+//mudança pra manter o console aberto
+Console.WriteLine("\nPressione qualquer tecla para sair...");
+Console.ReadKey();
+
 //subR(visual)
 static string[] ObterAlelos(string genotipo)
 {
